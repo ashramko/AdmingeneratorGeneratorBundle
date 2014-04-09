@@ -1,14 +1,4 @@
-{% block form_widget_compound %}
-{% spaceless %}
-    <div {{ block('widget_container_attributes') }}>
-        {% if form.parent is empty %}
-            {{ form_errors(form) }}
-        {% endif %}
-        {{ block('form_rows') }}
-        {{ form_rest(form) }}
-    </div>
-{% endspaceless %}
-{% endblock form_widget_compound %}
+{# extends 'form_div_layout.html.twig' #}
 
 {% block form_rows %}
 {% spaceless %}
@@ -26,12 +16,17 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div class="form_row field_{{ form.vars.name }} {% if errors|length > 0 %} field_error{% endif %}">
+    <div class="form_row field_{{ form.vars.name }} field_{{ formType|default('default') }} {% if errors|length > 0 %} field_error{% endif %} {{ not compound ? 'field_simple' }} {{ icon is defined and icon is not empty ? 'form_row_icon' }}">
         {{ form_label(form) }}
         <div class="field_content">
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ block('form_help') }}
+
+            {# icon #}
+            {% if icon is defined and icon is not empty and not compound %}
+                <span class="input_icon {{ icon }}"></span>
+            {% endif %}
         </div>
     </div>
 {% endspaceless %}
@@ -72,7 +67,7 @@
 
 {% block date_range_row %}
     {% spaceless %}
-        <div class="form_row field_date_range">
+        <div class="form_row field_{{ form.vars.name }} field_date_range">
             {{ form_label(form) }}
             <div class="field_content">
                 {{ form_errors(form) }}
@@ -82,7 +77,59 @@
     {% endspaceless %}
 {% endblock date_range_row %}
 
+    
+{% block date_row %}
+    {% spaceless %}
+        {% set icon = 'i_calendar' %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock date_row %}
+    
+{# add row type 
 
+    
+{% block money_row %}
+    {% spaceless %}
+        {% set type = type|default('money') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock money_row %}
+        
+{% block search_row %}
+    {% spaceless %}
+        {% set type = type|default('search') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock search_row %}
+        
+{% block percent_row %}
+    {% spaceless %}
+        {% set type = type|default('percent') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock percent_row %}
+
+{% block password_row %}
+    {% spaceless %}
+        {% set type = type|default('password') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock password_row %}
+        
+{% block email_row %}
+    {% spaceless %}
+        {% set type = type|default('email') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock email_row %} 
+        
+{% block ajax_autocomplete_row %}
+    {% spaceless %}
+        {% set type = type|default('ajax_autocomplete') %}
+        {{ block('form_row') }}
+    {% endspaceless %}
+{% endblock ajax_autocomplete_row %}
+#}
 
 {# --- FORM WIDGETS --- #}
 
@@ -201,3 +248,50 @@ $Строка_отображения_во_время_набора_с_клави�
     {% endspaceless %}
 {% endblock ajax_autocomplete_js %}        
 {% endblock ajax_autocomplete_widget %}
+
+{# block choice_widget_collapsed %}
+{% spaceless %}
+    {% if required and empty_value is none and not empty_value_in_choices %}
+        {% set required = false %}
+    {% endif %}
+    <div class="input_box">
+        <span class="icon_box"></span>
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {% if empty_value is not none %}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+            {% endif %}
+            {% if preferred_choices|length > 0 %}
+                {% set options = preferred_choices %}
+                {{ block('choice_widget_options') }}
+                {% if choices|length > 0 and separator is not none %}
+                    <option disabled="disabled">{{ separator }}</option>
+                {% endif %}
+            {% endif %}
+            {% set options = choices %}
+            {{ block('choice_widget_options') }}
+        </select>
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+       
+{% block form_widget_simple %}
+{% spaceless %}
+    <div class="input_box">
+        <span class="icon_box"></span>
+        {% set type = type|default('text') %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endspaceless %}
+{% endblock form_widget_simple #}
+        
+  
+
+
+{% block button_row %}
+{% spaceless %}
+    <div>
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock button_row %}
+        

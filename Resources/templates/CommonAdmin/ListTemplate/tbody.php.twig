@@ -6,13 +6,13 @@
         {{ echo_if (builder.ModelClass ~ "s|length > 0") }}
 
         {{ echo_for(builder.ModelClass, builder.ModelClass ~ "s" ) }}
-            {{ echo_include(builder.namespacePrefixForTemplate ~ bundle_name ~ ':' ~ builder.BaseGeneratorName ~ 'List:row.html.twig') }}
+            {{ echo_include(builder.namespacePrefixForTemplate ~ bundle_name ~ ':' ~ builder.BaseGeneratorName ~ 'List:row.html.twig', { index: echo_twig('loop.index') }) }}
         {{ echo_endfor() }}
 
         {{- block('object_actions_script') -}}
 
         {{ echo_else() }}
-        <tr class="list_trow no_results_row">
+        <tr class="no_results_row">
         {% if batch_actions is defined and batch_actions|length > 0 %}
             <td colspan="{{ (object_actions|length > 0) ? (builder.columns|length + 2) : builder.columns|length+1 }}">{{ echo_trans('list.no.results') }}</td>
         {% else %}

@@ -14,6 +14,12 @@ $(document).ready(function () {
         $('.popup').not($(this).parent('div.popup')).removeClass('popup_active');
     });
     
+    $('.table_responsive').footable({
+                        breakpoints: {
+                            phone: 480,
+                            tablet: 1024
+                        }
+                    });
 });
 
 
