@@ -11,7 +11,7 @@
                 {% endif %}
 
                 {{ echo_block("form_" ~ field) }}
-                    {{ echo_twig("form_row(form['" ~ field ~ "'])") }}
+                    {{ echo_twig("form_row(form['" ~ field ~ "'], {'formType': '" ~ builder.Columns[field].formType ~ "', 'icon': '" ~ builder.Columns[field].icon ~ "'})") }}
                 {{ echo_endblock() }}
 
                 {% if builder.Columns[field].credentials %}

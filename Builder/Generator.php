@@ -92,11 +92,11 @@ class Generator extends TwigGeneratorGenerator
                         $configurations = array();
                         foreach ($builder[$param] as $name => $configuration) {
                             if (is_array($configuration) || is_null($configuration)) {
-                                if (!is_null($value) && array_key_exists($name, $value)) {
+                                if (!is_null($value) && array_key_exists($name, $value)) {             
                                     $configurations[$name] = $configuration
                                         ? $this->mergeConfiguration($value[$name], $configuration) // Override definition
                                         : $value[$name]; // Configuration is null => use global definition
-                                } else {
+                                } else {      
                                     // New definition (new field, new action) from builder
                                     $configurations[$name] = $configuration;
                                 }
@@ -106,14 +106,14 @@ class Generator extends TwigGeneratorGenerator
                                 );
                             }
                         }
-
+                        
                         if (in_array($param, array('actions', 'object_actions', 'batch_actions'))) {
                             // Actions list comes from builder
                             $value = $configurations;
                         } else {
                             // All fields are still available in a builder
                             $value = array_merge($value ?:array(), $configurations);
-                        }
+                        }        
                     }
                 } else {
                     if (is_array($value)) {

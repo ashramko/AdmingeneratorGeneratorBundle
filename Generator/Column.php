@@ -44,6 +44,9 @@ class Column
 
     /** For special columns template */
     protected $extras;
+    
+    /** For special columns template */
+    protected $icon;
 
     public function __construct($name)
     {
@@ -244,5 +247,15 @@ class Column
     public function setCustomView($customView)
     {
         $this->customView = $customView;
+    }
+    
+    public function getIcon()
+    { 
+        return $this->icon;
+    }
+    
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
     }
 }

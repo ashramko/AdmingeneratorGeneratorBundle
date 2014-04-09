@@ -17,25 +17,16 @@
 {{- block('site_title') -}}
 
 {{ echo_block("body") }}
-    {{- block('title') -}}
+    <header>
+        <h1>{{ echo_trans(title,{}, i18n_catalog|default("Admin") ) }} ({{ echo_twig(builder.ModelClass ~ "s.nbResults") }})</h1>
+    </header>
+
     
     <div class="admin_list main_content{% if builder.filterColumns|length == 0 %} full_size{% endif %}">
     
         {{- block('list_scopes') -}}
         {{ echo_include(builder.namespacePrefixForTemplate ~ bundle_name ~ ':' ~ builder.BaseGeneratorName ~ 'List:results.html.twig') }}
-{#
-        <table id="table-list-{{ builder.ModelClass }}">
-            {{ block('list_thead') -}}
-            {{- block('list_tbody') }}
-        </table>
 
-        {{- block('list_paginator_pages') -}}
-        {{- block('list_batch_actions') -}}
-        <div id="generic_actions" class="actions list_actions">
-            {{ block('list_actions') -}}
-        </div>
-        {{- block('endform_batch_actions') }}
-#}
     </div>
 
     {{ echo_block("filters") }}

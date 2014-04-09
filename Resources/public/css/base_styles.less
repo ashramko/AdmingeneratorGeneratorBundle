@@ -1,126 +1,152 @@
 /*************************** Base styles *************************/
 
-@color-link: #377197;
+@color-link: #128bbd;
+@color-border: #c3c3c3;
+@color-blue: #008abd;
+@color-dark: #005b7d;
+@color-gray: #bfbfbf;
+@color-green: #8dc63f;
 @color-border: #e0e0e0;
-@border-radius: 5px; 
-@image-icon: url(../images/action_icons.png); 
-@image-arrow: url(../images/arrow_icons.png); 
+
+@icon-white: url(../images/icon_white.svg); 
+@icon-blue: url(../images/icon_blue.svg);
+@check-radio: url(../images/checkradio.svg);
+@round-icon-size: 3.1em;
 
 .absolute_left  (@top: 0px, @left:  0px) { position: absolute; top: @top; left:  @left; }
 .absolute_right (@top: 0px, @right: 0px) { position: absolute; top: @top; right: @right; }
 
-.menu           (@color_border: #fff, @color_bg: #000, @transparent: 90%, @color_text: #fff ) { 
-                color: @color_text; background: fadeout(@color_bg, @transparent); border: 1px solid fadeout(@color_border, @transparent); border-radius: @border-radius;
-    a, span, .link    { display: inline-block; padding: 7px 10px; color: fadeout(@color_text, 30%); cursor: pointer; }
-    &:hover     { background: fadeout(@color_bg, (@transparent - 20%)); border-color: fadeout(@color_border, (@transparent - 20%));
-        a, span, .link{ color: @color_text; text-decoration: none; }
-    }
-    &.active    { background: @color_border; border-color: @color_border;
-        a, span, .link{ color: @color_text;  }
-    }
-    &.current   { background: @color_bg; border-color: @color_border;
-        a, span, .link{ color: @color_text;  }
-    }
+.icon (@left: 0em, @top: 0em, @image: @icon-blue) { background-image: @image; background-position: @left (-0.5em + @top);  background-repeat:  no-repeat; background-size: 3.5em 197em; 
+    &.i_menu              { background-position: @left (-0.5em + @top); }
+    &.i_save-and-list, &.save-and-list { background-position: @left (-5em + @top); }
+    &.i_download          { background-position: @left (-9.8em + @top); }
+    &.i_settings          { background-position: @left (-14.4em + @top); }
+    &.i_filter            { background-position: @left (-18.8em + @top); }
+    &.i_save, &.save      { background-position: @left (-23.2em + @top); }
+    &.i_edit, &.edit      { background-position: @left (-27.6em + @top); }
+    &.i_calendar          { background-position: @left (-32.1em + @top); }
+    &.i_close             { background-position: @left (-36.6em + @top); }
+    &.i_table             { background-position: @left (-41.5em + @top); }
+    &.i_new               { background-position: @left (-46.1em + @top); }
+    &.i_list, &.list      { background-position: @left (-50.8em + @top); }
+    &.i_table2            { background-position: @left (-55.3em + @top); }
+    &.i_copy, &.copy      { background-position: @left (-59.8em + @top); }
+    &.i_search-icon       { background-position: @left (-64.2em + @top); }
+    &.i_reload            { background-position: @left (-68.7em + @top); }
+    &.i_euro              { background-position: @left (-73.1em + @top); }
+    &.i_dollar            { background-position: @left (-77.6em + @top); }
+    &.i_rub               { background-position: @left (-82.3em + @top); }
+    &.i_money, &.payment  { background-position: @left (-87em + @top); }
+    &.i_sms               { background-position: @left (-91.6em + @top); }
+    &.i_new2              { background-position: @left (-96.1em + @top); }
+    &.i_order             { background-position: @left (-100.6em + @top); }
+    &.i_info              { background-position: @left (-105.1em + @top); }
+    &.i_phone             { background-position: @left (-109.4em + @top); }
+    &.i_message           { background-position: @left (-114em + @top); }
+    &.i_comment           { background-position: @left (-118.5em + @top); }
+    &.i_logistic          { background-position: @left (-123em + @top); }
+    &.i_invoice, &.invoice { background-position: @left (-127.7em + @top); }
+    &.i_attachment        { background-position: @left (-132.5em + @top); }
+    &.i_client            { background-position: @left (-137em + @top); }
+    &.i_more-info         { background-position: @left (-141.3em + @top); }
+    &.i_password          { background-position: @left (-145.8em + @top); }
+    &.i_sklad             { background-position: @left (-150.2em + @top); }
+    &.i_delete, &.delete  { background-position: @left (-154.7em + @top); }
+    &.i_travel-list       { background-position: @left (-159.7em + @top); }
+    &.i_act, &.act        { background-position: @left (-164.4em + @top); }
+    &.i_nakladnaja        { background-position: @left (-169.2em + @top); }
+    &.i_dogovor           { background-position: @left (-173.6em + @top); }
+    &.i_garantija         { background-position: @left (-178em + @top); }
+    &.i_excel, &.excel    { background-position: @left (-182.4em + @top); }
+    &.i_short-table       { background-position: @left (-186.8em + @top); }
+    &.i_number            { background-position: @left (-191.5em + @top); }
+    // TO DO
+    &.i_print, &.print    { background-position: @left (-189.5em + @top); }
+    &.i_save-and-add, &.save-and-add { background-position: @left (-189.5em + @top); }
 }
 
-.round_box (@color: #c1c1c1, @radius: @border-radius) { 
-    border-radius: @radius; 
-    border: 1px solid @color;
-    padding: 5px 7px;
-}
-.focus_box (@color_border: @color-link) { 
-    border-color: @color_border; 
-    box-shadow: 0 0 10px lighten(@color_border, 40%);
-    color: darken(@color_border, 40%);
-}
-
-
-.gradient (@color_from, @color_to) {
-    background-image: linear-gradient(bottom, @color_from, @color_to);
-    background-image: -o-linear-gradient(bottom, @color_from, @color_to);
-    background-image: -moz-linear-gradient(bottom, @color_from, @color_to);
-    background-image: -webkit-linear-gradient(bottom, @color_from, @color_to);
-    background-image: -ms-linear-gradient(bottom, @color_from, @color_to);
-}
-.gradient_icon (@color_from, @color_to) {
-    background-image: @image-icon, linear-gradient(bottom, @color_from, @color_to);
-    background-image: @image-icon, -o-linear-gradient(bottom, @color_from, @color_to);
-    background-image: @image-icon, -moz-linear-gradient(bottom, @color_from, @color_to);
-    background-image: @image-icon, -webkit-linear-gradient(bottom, @color_from, @color_to);
-    background-image: @image-icon, -ms-linear-gradient(bottom, @color_from, @color_to);
-    background-position: 6px -56px, 0 0;
-    background-repeat: no-repeat;
-}
 
 /* BUTTONS */
-.button                 { .round_box; .gradient (#D4D4D4, #EEEEEE); display: inline-block; cursor: pointer; font-size: 1em; line-height: 1em; color: #333;
-    &:hover             { .focus_box; .gradient (#C6CFD5, #E8F3F9); text-decoration: none; }
+.button                 { display: inline-block; padding: 0.7em; color: #fff; cursor: pointer; text-decoration: none; vertical-align: middle;  background-color: @color-blue; border: none; border-top: 1px solid lighten(@color-blue, 10%); box-shadow: 0 1px  #000000;
+    &:hover             { border-top-color: lighten(@color-dark, 10%); background-color: @color-dark; }
 }
-.button_icon            { .button; .gradient_icon (#D4D4D4, #EEEEEE); padding-left: 30px !important; min-height: 13px;
-    &:hover             { .gradient_icon (#C6CFD5, #E8F3F9); }
-    &.new               { background-position: 6px 4px, 0 0; }
-    &.edit              { background-position: 6px -86px, 0 0; }
-    &.delete            { background-position: 6px -116px, 0 0; }
-    &.filter            { background-position: 6px -25px, 0 0; }
-    &.list              { background-position: 6px -146px, 0 0; }
-    &.copy              { background-position: 6px -326px, 0 0; }
-    &.print             { background-position: 6px -476px, 0 0; }
-    &.payment           { background-position: 6px -566px, 0 0; }
-    &.save              { background-position: 6px -686px, 0 0; }
-    &.save-and-list     { background-position: 6px -686px, 0 0; }
-    &.save-and-add      { background-position: 6px -686px, 0 0; }
-    &.invoice           { background-position: 6px -536px, 0 0; }
-    &.act               { background-position: 6px -716px, 0 0; }
-    &.tool              { background-position: 6px -776px, 0 0; }
-    &.next              { background-position: 6px -806px, 0 0; }
-    &.prev              { background-position: 6px -146px, 0 0; }
-    &.excel             { background-position: 6px -296px, 0 0; }
+.button_icon            { .button; .icon(-0.3em, 0em, @icon-white); padding-left: 3em !important; }
+
+/* ACTIONS */
+.link_icon              { position: relative; display: inline-block; vertical-align: middle;
+    &:before            { .icon(-0.17em, 0.3em, @icon-white); display: inline-block; width: @round-icon-size; height: @round-icon-size; margin-right: 0.5em; vertical-align: middle; background-color: @color-blue; border-radius: 50%; content: ''; }
+    &:hover:before      { background-color: @color-dark; }
+}
+.link_icon_mini         { .link_icon; text-align: center;
+    &:before            { margin: 0; }
+    span                { display: block; margin-top: 0.2em; font-size: 0.7em; text-decoration: none;  }
 }
 
-/* LINKS */
-.link                   { color: @color-link; text-decoration: none; cursor: pointer;
-    &:hover             { color: saturate(@color-link, 50%); text-decoration: underline; }
+/* FORM */
+.form_row_icon          { 
+    &.field_simple .field_content { position: relative; 
+        input           { padding-left: 2.75em; }
+        select          { padding-left: 2.75em; }
+        .input_icon     { .icon(-0.4em, 0em, @icon-white); .absolute_left(0em, 0em); display: inline-block; content: ""; width: 2.65em; height: 2.65em; background-color: @color-blue; } 
+    }
 }
-.link_icon              { .link; display: inline-block; padding: 0 0 1px 20px; background: @image-icon no-repeat 0px 20px; 
-    &.new               { background-position: 0px 0px; }
-    &.edit              { background-position: 0px -90px; }
-    &.delete            { background-position: 0px -120px; }
-    &.list              { background-position: 0px -150px; }
-    &.copy              { background-position: 0px -330px; }
-    &.payment           { background-position: 0px -570px; }
-    &.invoice           { background-position: 0px -540px; }
-    &.act               { background-position: 0px -720px; }
-    &.tool              { background-position: 0px -780px; }
-    &.next              { background-position: 0px -810px; }
-    &.prev              { background-position: 0px -150px; }
-    &.excel             { background-position: 0px -300px; }
+
+
+.menu (@color_border: fadeout(#fff, 90%), @color_bg: lighten(@color-dark, 5%), @color_active: @color-blue, @color_text: #fff ) { color: @color_text; background: @color_bg; border: 1px solid @color_border;
+    a, span, .link                      { display: block; padding: 0.65em 1em; color: @color_text; cursor: pointer; text-decoration: none; 
+        &:hover                         { text-decoration: underline; }
+    }
+    &.current                           {  }
+    &.active                            { background: @color_active; }
 }
-a                       { .link; }
+
+.visible                                { display: block !important; }
+
+
 
 /* TABLE */
-.table                  { width: 100%; background: #fff; border: 1px solid @color-border; 
-    th                  { .gradient (#e5e5e5, #F7F7F7); padding: 7px; border: 1px solid @color-border; vertical-align: middle; }
-    td                  { padding: 2px 7px; height: 30px; border: 1px solid @color-border; vertical-align: middle; }
-    tr:hover td         { background: #FFFFdd; }
-    td.td_decimal       { white-space: nowrap; text-align: right; }
-    td.td_boolean       { text-align: center; }
-    tr.row_total td     { background: #eaeaea; font-weight: bold; }
-    tr.row_highlight td { background: #ffa; }
+
+.table                                  { width: 100%; background-color: #fff; 
+    thead th, tbody td                  { height: 2em; vertical-align: middle; }
+    thead th                            { padding: 0.5em; border-right: 1px solid #fff; background-color: @color-gray;
+        &.sortable a                    { color: #000; }
+    }  
+    tbody td                            { padding: 0.5em; border-right: 1px solid #fff; border-bottom: 1px solid @color-border;  }
+    tfooter                             { }
+    //для неадаптивных таблиц
+    &:not(.table_responsive) tbody tr:nth-child(2n) td { background-color: #f2f2f2; } 
 }
 
-/* POPUP */
-.popup                  { display: none; 
-    .popup_arrow        { display: inline-block; width: 15px; height: 15px; border: 1px solid #ddd; border-radius: 3px; cursor: pointer; background: @image-arrow 2px -35px no-repeat #fafafa; }
-    .popup_content      { display: none; }
-    &.popup_ready       { display: inline-block; position: relative; z-index: 1; }
-    &.popup_active      { z-index: 1000;  }
-    &.popup_active .popup_content    { display: block; z-index: 1000; position: absolute; top: 17px; left: 0px; padding: 8px; background: #fff; border: 1px solid #ddd; border-radius: 5px; box-shadow: 2px 2px 4px #999;}
-    &.popup_active .popup_arrow      { background-position: 2px -16px; }
-    &.popup_right  .popup_content    { left: auto; right: 0px; }
+/*Footable responsive*/
+.footable                               { 
+    &.breakpoint tbody tr               {  
+        &.footable-first-column         { padding-left: 30px; }
+        &.footable-detail-show > td > span.footable-toggle:before { content: ''; display: inline-block; margin-bottom: 1px; margin-top: -14px; border: 10px solid transparent; border-bottom: 10px solid #fff; }
+        &:hover:not(.footable-row-detail) {  cursor: pointer;}
+        th                              { -webkit-touch-callout: none; }
+        td span.footable-toggle         { display: inline-block;  speak: none; position: relative;
+            &:before                    { content: ''; display: inline-block; margin-bottom: -10px; border: 10px solid transparent; border-top: 10px solid @color-dark; }  
+        }
+        &.odd td                        { background-color: #f2f2f2; }
+        &.footable-detail-show          {  
+            .footable-visible           { color: #fff; background-color: @color-blue; }
+        }
+        &.footable-row-detail           { 
+            td                          { background-color: #cbe6f2; }
+            .footable-row-detail-inner  {  display: table; 
+                .footable-row-detail-row {  display: table-row; 
+                    .footable-row-detail-name,
+                    .footable-row-detail-value  {  display: table-cell; }
+                    &.footable-row-detail-name  { padding: 5px 25px 5px 0; }
+                    &.footable-row-detail-value { padding: 5px; }
+                }
+            }
+            
+        } 
+        .footable-row-detail-group          {  display: block;}
+    }
+    
+    
+        
 }
 
-/* OTHER */
-.red                    { color: #d70000; }
-.green                  { color: #009900; }
-.ar                     { text-align: right; }
-.ac                     { text-align: center; }

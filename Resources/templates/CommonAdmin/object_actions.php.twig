@@ -1,7 +1,8 @@
 {% block object_actions %}
     {{ echo_block("object_actions") }}
         {% if object_actions is defined  and object_actions|length > 0 %}
-        <td class="object_actions actions">
+        <td class="td_object_actions">
+            <div class="object_actions">
             {% for action in builder.ObjectActions %}
                 {{ echo_block('td_list_object_actions_' ~ action.name) }}
                     {% if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
@@ -22,6 +23,7 @@
                 {{ echo_endblock() }}
             {% endfor %}
             {{ echo_block('td_list_object_actions_customActions') }}{{ echo_endblock() }}
+            </div>
         </td>
         {% endif -%}
     {{ echo_endblock() }}
@@ -53,6 +55,7 @@
         title="{{ echo_trans(action.label, {}, translationDomain) }}"
         {%- if action.confirm %} data-confirm="{{ echo_trans(action.confirm, {}, translationDomain) }}" {% endif -%}
         {%- if action.csrfProtected %} data-csrf-token="{{ echo_path(actionRoute, actionParams, ['csrf_token']) }}" {% endif -%}>
+        <span>{{- echo_trans(action.label, {}, translationDomain) -}}</span>
     </a>
     {{ echo_endspaceless() }}
     {% endspaceless %}
