@@ -1,20 +1,22 @@
 {% block list_paginator_perpage %}
 {{ echo_block("list_paginator_perpage") }}
     {{ echo_if( builder.ModelClass ~ "s.haveToPaginate or "~ builder.ModelClass ~ "s.maxPerPage is not sameas(10)") }}
-    <div class="btn-group input-prepend">
-        <div class="btn btn-reset">{{ echo_trans('pagerfanta.view.perpage') }}</div>
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            {{ echo_twig('"pagerfanta.num.elements"|trans({"%number%": '~ builder.ModelClass ~ 's.maxPerPage}, "Admingenerator")') }} <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu pull-right">
-            {{ echo_for('perPage', '[10, 25, 50, 75, 100]') }}
-            <li>
-                <a href="{{ echo_path(builder.routePrefixWithSubfolder ~ '_' ~ bundle_name ~ ( builder.BaseGeneratorName ? "_" ~ builder.BaseGeneratorName : "" ) ~ '_list', '{perPage: perPage}') }}">
-                    {{ echo_twig('"pagerfanta.num.elements"|trans({"%number%": perPage}, "Admingenerator")') }}
-                </a>
-            </li>
-            {{ echo_endfor() }}
-        </ul>
+    <div class="list_perpage">
+        <label>{{ echo_trans('pagerfanta.view.perpage') }}</label>
+        <span class="drop_list">
+            <a href="#" class="selected">
+                {{ echo_twig('"pagerfanta.num.elements"|trans({"%number%": '~ builder.ModelClass ~ 's.maxPerPage}, "Admingenerator")') }} <span class="caret"></span>
+            </a>
+            <ul>
+                {{ echo_for('perPage', '[10, 25, 50, 75, 100]') }}
+                <li>
+                    <a href="{{ echo_path(builder.routePrefixWithSubfolder ~ '_' ~ bundle_name ~ ( builder.BaseGeneratorName ? "_" ~ builder.BaseGeneratorName : "" ) ~ '_list', '{perPage: perPage}') }}">
+                        {{ echo_twig('"pagerfanta.num.elements"|trans({"%number%": perPage}, "Admingenerator")') }}
+                    </a>
+                </li>
+                {{ echo_endfor() }}
+            </ul>
+        </span>
     </div>
     {{ echo_endif() }}
 {{ echo_endblock() }}
@@ -22,7 +24,7 @@
 
 {% block list_paginator_pages %}
     {{ echo_block('list_paginator_pages') }}
-    <div class="pagination pull-right">
+    <div class="pagination">
         {{ echo_twig("pagerfanta(" ~ builder.ModelClass ~ "s, 'admingenerator')") }}
     </div>
     {{ echo_endblock() }}

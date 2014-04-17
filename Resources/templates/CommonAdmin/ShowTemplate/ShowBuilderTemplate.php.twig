@@ -4,7 +4,6 @@
 {% use '../CommonAdmin/javascripts.php.twig' %}
 {% use '../CommonAdmin/title.php.twig' %}
 {% use '../CommonAdmin/tabs.php.twig' %}
-{% use '../CommonAdmin/object_actions.php.twig' %}
 
 {{ echo_extends( builder.getBaseAdminTemplate ) }}
 
@@ -14,21 +13,14 @@
 
 {{ echo_block("javascripts") }}
     {{- block('complementary_javascripts') -}}
-    {{- block('object_actions_script') -}}
 {{ echo_endblock() }}
 
 {{- block('site_title') -}}
 
 {{ echo_block("body") }}
     {{- block('title') -}}
-    
-    <div class="row-fluid object-actions-{{ builder.ModelClass }}">
-        <div class="span12">
-            {{- block('object_actions') -}}
-        </div>
-    </div>
 
-    <div class="row-fluid">
+    <div class="form_admin">
         {% if sidebar is defined and sidebar|length > 0 %}
             <div class="span8">
         {% endif %}

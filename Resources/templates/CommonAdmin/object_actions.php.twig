@@ -55,6 +55,7 @@
         title="{{ echo_trans(action.label, {}, translationDomain) }}"
         {%- if action.confirm %} data-confirm="{{ echo_trans(action.confirm, {}, translationDomain) }}" {% endif -%}
         {%- if action.csrfProtected %} data-csrf-token="{{ echo_path(actionRoute, actionParams, ['csrf_token']) }}" {% endif -%}>
+        <i class="{{ action.icon ? action.icon : 'i_' ~ action.name }}"></i>
         <span>{{- echo_trans(action.label, {}, translationDomain) -}}</span>
     </a>
     {{ echo_endspaceless() }}
