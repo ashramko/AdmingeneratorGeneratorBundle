@@ -81,12 +81,13 @@
             {% block header %}
 
                 {% block logo %}
+                    <a class="logo" href="#">NitraTheme</a>
                 {% endblock %}
             
                 {% block menu_mobile %}
                     <div class="menu_mobile">
-                        <a href="#" onclick="toggleBlock('.menu_settings', this);" class="i_table"></a>
-                        <a href="#" onclick="toggleBlock('.filters, .toggle_filter', this);" class="i_filter"></a>
+                        <a href="#" onclick="toggleBlock('.list_bar', this);" class="i_table"></a>
+                        <a href="#" onclick="toggleBlock('.list_filters', this);" class="i_filter"></a>
                         <a href="#" onclick="toggleBlock('.menu_settings', this);" class="i_settings"></a>
                         <a href="#" onclick="toggleBlock('.menu_main', this);" class="i_menu"></a>
                     </div>
@@ -96,15 +97,32 @@
                     {% if app.user %}
                         <div class="menu_settings menu_drop">
                             <ul>
+                                {% block menu_store %}
+                                    <li>
+                                        <span class='link'>{{ 'profile.store'|trans({}, 'Store') }}</span>
+                                        <span class="drop_list">
+                                            <a href="#" class="selected">Магазин</a>
+                                            <ul class="menu_level_1">
+                                                <li><a>Shop1</a></li>
+                                                <li><a>Shop2</a></li>
+                                            </ul>    
+                                        </span>
+                                    </li>
+                                {% endblock menu_store %}
+                                
                                 {% block menu_language %}
-                                <li>
-                                    <span class='link'>{{ 'profile.language'|trans({}, 'Language') }}</span>
-                                    <ul class="menu_level_1">
-                                        <li><a>Russian</a></li>
-                                        <li><a>Russian2</a></li>
-                                    </ul>
-                                </li>
+                                    <li>
+                                        <span class='link'>{{ 'profile.language'|trans({}, 'Language') }}</span>
+                                        <span class="drop_list">
+                                            <a href="#" class="selected">Язык</a>
+                                            <ul class="menu_level_1">
+                                                <li class="active"><a>Russian</a></li>
+                                                <li><a>Russian2</a></li>
+                                            </ul>
+                                        </span>
+                                    </li>
                                 {% endblock menu_language %}
+                                
                                 <li>
                                     <span class="username">{{ app.user }}</span>
                                 </li>

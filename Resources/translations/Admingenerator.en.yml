@@ -11,10 +11,10 @@ boolean:
 
 # Pager
 pagerfanta:
-    previous:       Previous
-    next:           Next
-    view.perpage:   Display
-    num.elements:   %number% elements
+    previous:       '<span class="prev">&nbsp;</span>'
+    next:           '<span class="next">&nbsp;</span>'
+    view.perpage:   Display on page
+    num.elements:   %number%
 
 # List
 list:

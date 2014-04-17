@@ -295,3 +295,105 @@ $Строка_отображения_во_время_набора_с_клави�
 {% endspaceless %}
 {% endblock button_row %}
         
+        
+        
+{% block nlupload_widget %}
+    {# Поле для завантаження файлів #}
+    <input type="file" class="fileupload" multiple="multiple" data-url="/nlupload/attach"/>
+
+    {# Список завантаженних файлів #}
+    <table id="files">
+    {% for choice in choices %}
+        {% if choice is selectedchoice(value) %}
+            <tr class="template-download fade">
+                <td><img alt="image" src="{{ path('nitra_upload_upload_get', {'id': choice.value }) }}" width="100" /></td>
+                <td class="name"><a href="{{ path('nitra_upload_upload_get', {'id': choice.value }) }}">{{ choice.label }}</a></td>
+                <td class="delete"><button class="delete" data-type="POST" data-url="{{ path('nitra_upload_upload_delete', {'id': choice.value }) }}">Видалити</button>
+                    <input type="hidden" name="{{ form.parent.vars.id }}[{{ form.vars.name }}][]" value="{{ choice.value }}">
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+
+
+{% javascripts
+    '@NitraUploadBundle/Resources/public/js/vendor/jquery.ui.widget.js'
+    '@NitraUploadBundle/Resources/public/js/jquery.fileupload.js'
+    '@NitraUploadBundle/Resources/public/js/jquery.fileupload-ui.js' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
+$(function () {
+    $('input.fileupload').attr('data-url', '{{ path('nitra_upload_upload_attach') }}' );
+    $('input.fileupload').fileupload({
+        autoUpload: true,
+        filesContainer: '#files',
+        uploadTemplateId: null,
+        downloadTemplateId: null,
+        destroy: function (e, data) {
+            var del_confirm = confirm('Видалити файл?');
+            if (!del_confirm) {
+                return;
+            }
+            var that = $(this).data('fileupload');
+            if (data.url) {
+                $.ajax(data);
+                that._adjustMaxNumberOfFiles(1);
+            }
+            that._transition(data.context).done(
+                function () {
+                    $(this).remove();
+                    that._trigger('destroyed', e, data);
+                }
+            );
+        },
+        uploadTemplate: function (o) {
+            var rows = $();
+            $.each(o.files, function (index, file) {
+                var row = $('<tr class="template-upload fade">' +
+                    '<td class="name error"></td><td class="cancel"><button class="delete">Cancel</button></td></tr>');
+                row.find('.name').text(file.name + ' - триває завантаження...');
+                if (file.error) {
+                    row.find('.error').text(file.error);
+                }
+                rows = rows.add(row);
+            });
+            return rows;
+        },
+        downloadTemplate: function (o) {
+            var rows = $();
+            $.each(o.files, function (index, file) {
+
+            var row = $('<tr class="template-download fade">' +
+                     '<td><img  /></td>' +
+                     '<td class="name error"><a></a></td>' + 
+                     '<td class="delete"><button class="delete">Вилучити</button> ' +
+                     '<input type="hidden" name="{{ form.parent.vars.id }}[{{ form.vars.name }}][]" value="' + file.id + '"></td></tr>');
+           
+            if (file.error) {
+                row.find('.name').text(file.name);
+                row.find('.error').text(file.error);
+            } else {
+                row.find('.name a').text(file.name);
+                if (file.thumbnail_url) {
+                    row.find('.preview').append('<a><img></a>')
+                        .find('img').prop('src', file.thumbnail_url);
+                    row.find('a').prop('rel', 'gallery');
+                }
+                row.find('a').prop('href', file.url);
+                row.find('.delete button')
+                    .attr('data-type', file.delete_type)
+                    .attr('data-url', "/nlupload/delete/" + file.id); // hack
+            }
+            rows = rows.add(row);
+        });
+        return rows;
+        }
+    });
+});
+</script>
+
+{% endblock %}
+

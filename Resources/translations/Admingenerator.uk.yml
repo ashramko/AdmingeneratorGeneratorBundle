@@ -11,10 +11,10 @@ boolean:
 
 # Pager
 pagerfanta:
-    previous:       Поп
-    next:           Наст
-    view.perpage:   Показати
-    num.elements:   %number% елементів
+    previous:       '<span class="prev">&nbsp;</span>'
+    next:           '<span class="next">&nbsp;</span>'
+    view.perpage:   Показати на сторінці
+    num.elements:   %number% 
 
 # List
 list:
