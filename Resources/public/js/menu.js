@@ -21,7 +21,7 @@ $(document).ready(function(){
         // Для мобильной версии
         if($(this).parents('div.menu_drop').hasClass('visible')) {
             $(this).toggleClass('active').siblings('li.active').removeClass('active');
-            return false;
+//            return false;
         } 
         // Для полной версии
         else {

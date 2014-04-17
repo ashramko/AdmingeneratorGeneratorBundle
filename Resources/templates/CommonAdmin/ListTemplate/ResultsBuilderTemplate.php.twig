@@ -7,38 +7,37 @@
 
 {% block list_results %}
 
-{% if actions is defined and actions|length > 0 %}
-     <div id="generic_actions" class="">
-         {{ block('generic_actions') -}}
-     </div>
-{% endif -%}
-
-<div class="results-list">
-     
-    <div class="">
-         {{- block('list_paginator_pages') -}}
-    </div>    
-        
+<div class="list">
+    
     {{- block('form_batch_actions') }}
-        <div class="table_list"> 
-            <table id="table-list-{{ builder.ModelClass }}" class="table table_responsive object-actions-{{ builder.ModelClass }}">
-                {{ block('list_thead') -}}
-                {{- block('list_tbody') }}
-            </table>
-        </div>        
+    
+    <div class="list_header">
 
-        <div class="form-actions footer_list_actions">
-        {% if batch_actions is defined and batch_actions|length > 0 %}
-            <div id="batch_actions" class="batch_actions">
-                {{ block('batch_actions') }}
-            </div>
-        {% endif -%}
-                
-            <div class="pagination_page_count">
-                {{- block('list_paginator_perpage') -}}
-            </div>
+        <div class="list_bar">
+            {% if actions is defined and actions|length > 0 %}
+                {{ block('generic_actions') -}}
+            {% endif -%}
 
+            {% if batch_actions is defined and batch_actions|length > 0 %}
+                {{ block('batch_actions') }} {# TODO #}
+            {% endif -%}
         </div>
+        
+        {{- block('list_paginator_perpage') -}}
+    </div>
+
+    <div class="list_table"> 
+        <table id="table-list-{{ builder.ModelClass }}" class="table table_responsive">
+            {{ block('list_thead') -}}
+            {{- block('list_tbody') }}
+        </table>
+    </div>        
+
+    <div class="list_footer">
+        {{- block("list_paginator_pages") -}}
+        {{- echo_twig('block("list_paginator_perpage")') -}}
+    </div>
+    
     {{- block('endform_batch_actions') }}
 </div>
 {% endblock list_results %}

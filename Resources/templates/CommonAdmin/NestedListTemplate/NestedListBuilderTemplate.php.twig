@@ -21,7 +21,7 @@
 {{ echo_block("body") }}
     {{- block('title') -}}
 
-    <div class="row-fluid">
+    <div class="form_admin">
         <div class="{% if builder.filterColumns|length == 0 %} span12 {% else %} span9 {% endif %}">
             {{ block('list_scopes') -}}
 

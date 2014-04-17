@@ -16,7 +16,7 @@ class NewAction extends Action
     {
         parent::__construct($name, 'generic');
 
-        $this->setIcon('i_add');
+        $this->setIcon('i_new');
         $this->setLabel('action.generic.new');
     }
 }
