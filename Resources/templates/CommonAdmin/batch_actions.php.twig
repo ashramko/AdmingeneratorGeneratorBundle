@@ -1,5 +1,6 @@
 {% block batch_actions %}
 {{ echo_block("batch_actions") }}
+<div id="batch_actions" class="batch_actions">
 <div class="btn-group">
     <div class="btn select-caret">
         <select id="batchActionSelector" name="action">
@@ -28,6 +29,7 @@
         </select>
     </div>
     <button type="submit" name="batch" class="btn">{{ echo_trans('batch.list.send') }}</button>
+</div>
 </div>
 {{ echo_endblock() }}
 {% endblock %}

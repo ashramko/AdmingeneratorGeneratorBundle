@@ -1,7 +1,7 @@
 {% block list_filters %}
 {{ echo_block('list_filters') }}
-<a class="toggle_filter"></a>
-<div class="filters">
+<a class="toggle_filter" onclick="toggleBlock('.list_filters', this);"><i></i></a>
+<div class="list_filters">
     <form action="{{ echo_path(builder.routePrefixWithSubfolder ~ '_' ~ bundle_name ~ ( builder.BaseGeneratorName ? "_" ~ builder.BaseGeneratorName : "" ) ~ "_filters" ) }}" method="post" {{ echo_twig("form_enctype(form)") }}>
         <legend>{{ echo_trans('list.filters') }}</legend>
         <fieldset class="form_block form_fieldset_NONE">
@@ -28,24 +28,3 @@
 {{ echo_endblock() }}
 {% endblock list_filters %}
 
-<script>
-    $(document).ready(function(){
-        $('.close').click(function(){
-            $('.filters').hide();
-        });
-        $('.toggle_filter').click(function(){
-            if ($('.filters').is(':visible'))  {
-                $('.admin_list').animate({marginRight : 0});
-                $('.filters').hide(400);
-                $('.pagination').css({'right':'20px'});
-                $('.toggle_filter').css({'background-position':'-25px -25px'});
-            }
-            else {
-                $('.admin_list').animate({marginRight : 225}); 
-                $('.filters').show('slow'); 
-                $('.pagination').css({'right':'0px'});
-                $('.toggle_filter').css({'background-position':'0px -25px'});
-            }   
-        });
-    });
-</script>
