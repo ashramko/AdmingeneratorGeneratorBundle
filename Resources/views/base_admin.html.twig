@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="HandheldFriendly" content="True"/>
         <title>{% block title %}AdmingeneratorGeneratorBundle{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets              
@@ -76,7 +77,7 @@
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body {% block body_class '' %}>
         <div class="header">
             {% block header %}
 

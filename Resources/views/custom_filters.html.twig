@@ -1,0 +1,16 @@
+{% trans_default_domain "Admingenerator" %}
+{% block custom_filters %}
+    <a class="toggle_filter" onclick="toggleBlock('.list_filters', this);"><i></i></a>
+    <div class="list_filters custom_filters">
+        <form method="post" {{ form_enctype(form) }} {% block action '' %}>
+            <legend>Фільтри</legend>
+            {{ form_widget(form) }}
+            {% block actions %}
+                <div class="actions">
+                    <button type="submit" class="btn"><i class="icon-white"></i> {{ 'list.button.filter'|trans }}</button>
+                    {% block special_button '' %}
+                </div>
+            {% endblock actions %}
+        </form>    
+    </div>
+{% endblock custom_filters %}

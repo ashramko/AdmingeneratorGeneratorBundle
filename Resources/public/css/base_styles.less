@@ -33,7 +33,7 @@
     &.i_list, &.list      { background-position: @left (-50.8em + @top); }
     &.i_table2            { background-position: @left (-55.3em + @top); }
     &.i_copy, &.copy      { background-position: @left (-59.8em + @top); }
-    &.i_search-icon       { background-position: @left (-64.2em + @top); }
+    &.i_search            { background-position: @left (-64.2em + @top); }
     &.i_reload            { background-position: @left (-68.7em + @top); }
     &.i_euro              { background-position: @left (-73.1em + @top); }
     &.i_dollar            { background-position: @left (-77.6em + @top); }
@@ -110,7 +110,6 @@
     a, span, .link                      { display: block; padding: 1em; color: @color_text; cursor: pointer; text-decoration: none; 
         &:hover                         { text-decoration: underline; }
     }
-    &.current                           {  }
     &.active                            { background: @color_active; }
 }
 
@@ -125,13 +124,18 @@
         &:first-child                   { border-left: 1px solid @color-border; }
         &:last-child                    { border-right: 1px solid @color-border; }
     }
-    thead th                            { padding: 0.5em; border-right: 1px solid #fff; background-color: @color-gray;
-        &.sortable a                    { color: #000; }
+    thead th                            { padding: 0.5em; border-right: 1px solid #fff; border-top: 1px solid #fff; background-color: @color-gray;
+        &.sortable a                    { color: #000; 
+            &:after                     { .arrow_down(-0.1em, 0, 0.4em, @color-blue ); margin-left: 0.3em; content: ''; }
+        }
+        &.actions                       { width: 14em; }
     }  
     tbody tr                            { 
         &.odd td                        { background-color: #f2f2f2; }
         td                              { padding: 0.5em; border-right: 1px solid #fff; border-bottom: 1px solid @color-border; 
-            .object_actions a span      { display: none; }
+            .object_actions             {
+                span                    { display: none; }
+            } 
         }
     }
     tfooter                             { }
@@ -170,4 +174,15 @@
         .footable-row-detail-group          {  display: block;}
     }    
 }
+
+/*Table balance*/
+.table_balance                              {
+    .green                                  { color: #6BAA0A; }
+    .red                                    { color: #9e0b0f; }
+    tr                                      {
+        &.row_total td                      { background: #fff799 !important; }
+        &.row_highlight td                  { background: lighten(#fff799, 15%) !important; }
+    }
+}
+
 

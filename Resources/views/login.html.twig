@@ -1,12 +1,8 @@
 {% extends '::base_admin.html.twig' %}
 
-{% block header %}
-    {% block logo %}
-        <div class="logo">
-            Вход в систему "{{ block('title') }}"
-        </div>
-    {% endblock %}
-{% endblock %}
+{% block body_class %} class="home_page"{% endblock %}
+
+{% block header '' %}
 
 {% block body %}
 <div class="login_content">
@@ -22,23 +18,21 @@
         </a>
     {% else %}
         <form class="form_block" action="{{ path("fos_user_security_check") }}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-            <div class="form_row">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" /> 
+             <div class="form_row field_simple form_row_icon">
                 <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                <div class="field_content">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                        <span class="input_icon i_client"></span>
+                </div>
             </div>
-
-            <div class="form_row">
+            <div class="form_row field_simple form_row_icon">
                 <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-                <input type="password" id="password" name="_password" />
+                <div class="field_content">
+                    <input type="password" id="password" name="_password" />
+                    <span class="input_icon i_password"></span>
+                </div>
             </div>
-
-            <div class="form_row" style="display: none;">
-                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-            </div>
-
             <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
         </form>
     {% endif %}

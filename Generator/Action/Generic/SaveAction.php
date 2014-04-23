@@ -16,8 +16,7 @@ class SaveAction extends Action
         parent::__construct($name, 'generic');
 
         $this->setSubmit(true);
-        $this->setClass('btn-success');
-        $this->setIcon('icon-ok icon-white');
+        $this->setIcon('i_save');
         $this->setLabel('action.generic.save');
     }
 }

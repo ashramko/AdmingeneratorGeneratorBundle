@@ -16,8 +16,7 @@ class SaveAndAddAction extends Action
         parent::__construct($name, 'generic');
 
         $this->setSubmit(true);
-        $this->setClass('btn-primary');
-        $this->setIcon('icon-plus icon-white');
+        $this->setIcon('i_save-and-add');
         $this->setLabel('action.generic.save-and-add');
     }
 }
