@@ -4,7 +4,7 @@
     <div class="list_perpage">
         <label>{{ echo_trans('pagerfanta.view.perpage') }}</label>
         <span class="drop_list">
-            <a href="#" class="selected">
+            <a class="selected">
                 {{ echo_twig('"pagerfanta.num.elements"|trans({"%number%": '~ builder.ModelClass ~ 's.maxPerPage}, "Admingenerator")') }} <span class="caret"></span>
             </a>
             <ul>

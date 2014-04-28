@@ -1,6 +1,6 @@
 {% block list_filters %}
 {{ echo_block('list_filters') }}
-<a class="toggle_filter" onclick="toggleBlock('.list_filters', this);"><i></i></a>
+<a class="toggle_filter" onclick="$('.list_filters').toggleClass('visible_pc'); $(this).toggleClass('active');"><i></i></a>
 <div class="list_filters">
     <form action="{{ echo_path(builder.routePrefixWithSubfolder ~ '_' ~ bundle_name ~ ( builder.BaseGeneratorName ? "_" ~ builder.BaseGeneratorName : "" ) ~ "_filters" ) }}" method="post" {{ echo_twig("form_enctype(form)") }}>
         <legend>{{ echo_trans('list.filters') }}</legend>

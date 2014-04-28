@@ -3,25 +3,41 @@
         {% if object_actions is defined  and object_actions|length > 0 %}
         <td class="td_object_actions">
             <div class="object_actions">
+            {% set popupActions = [] %}
             {% for action in builder.ObjectActions %}
-                {{ echo_block('td_list_object_actions_' ~ action.name) }}
-                    {% if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
-                        {{ echo_if_granted( action.credentials ? action.credentials : builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials'), builder.ModelClass ) }}
-                    {% endif -%}
-                        {% if action.conditionalFunction %}
-                            {{ echo_if ((action.conditionalInverse == 'true' ? 'not ' : '') ~ builder.ModelClass ~ "." ~ action.conditionalFunction ~ '(' ~ action.conditionalParameters|join(',') ~')') }}
-                        {% endif %}
+                {% set action %}
+                    {{ echo_block('td_list_object_actions_' ~ action.name) }}
+                        {% if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
+                            {{ echo_if_granted( action.credentials ? action.credentials : builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials'), builder.ModelClass ) }}
+                        {% endif -%}
+                            {% if action.conditionalFunction %}
+                                {{ echo_if ((action.conditionalInverse == 'true' ? 'not ' : '') ~ builder.ModelClass ~ "." ~ action.conditionalFunction ~ '(' ~ action.conditionalParameters|join(',') ~')') }}
+                            {% endif %}
 
-                        {{ block('object_action_block') }}
-
-                        {% if action.conditionalFunction %}
+                                {{ block('object_action_block') }}
+                            {% if action.conditionalFunction %}
+                                {{ echo_endif () }}
+                            {% endif %}
+                        {%- if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
                             {{ echo_endif () }}
                         {% endif %}
-                    {%- if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
-                        {{ echo_endif () }}
-                    {% endif %}
-                {{ echo_endblock() }}
+                    {{ echo_endblock() }}
+                {% endset %}
+                {% if loop.index > 2 %}
+                    {% set popupActions = popupActions|merge([action]) %}
+                {% else %}
+                    {{ action }}
+                {% endif %}
             {% endfor %}
+            {% if popupActions|length %}
+                {{ echo_block('popup') }}
+                    <div class="popup">
+                        {{ echo_block('popup_content') }}
+                            {{ popupActions|join('') }}
+                        {{ echo_endblock('popup_content') }}
+                    </div>
+                {{ echo_endblock('popup') }}
+            {% endif %}
             {{ echo_block('td_list_object_actions_customActions') }}{{ echo_endblock() }}
             </div>
         </td>

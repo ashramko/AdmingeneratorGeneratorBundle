@@ -11,6 +11,7 @@
 @icon-white: url(../images/icon_white.svg); 
 @icon-blue: url(../images/icon_blue.svg);
 @check-radio: url(../images/checkradio.svg);
+@icon-more-info: url(../images/icon_more_info.svg);
 @round-icon-size: 3.1em;
 
 .border_box                              { box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
@@ -128,14 +129,11 @@
         &.sortable a                    { color: #000; 
             &:after                     { .arrow_down(-0.1em, 0, 0.4em, @color-blue ); margin-left: 0.3em; content: ''; }
         }
-        &.actions                       { width: 14em; }
     }  
     tbody tr                            { 
-        &.odd td                        { background-color: #f2f2f2; }
-        td                              { padding: 0.5em; border-right: 1px solid #fff; border-bottom: 1px solid @color-border; 
-            .object_actions             {
-                span                    { display: none; }
-            } 
+        &.odd                           { background-color: #f2f2f2 !important; }
+        td                              { padding: 0.5em; border-right: 1px solid #fff; border-bottom: 1px solid @color-border;  
+            .object_actions span        { display: none; }
         }
     }
     tfooter                             { }
@@ -145,17 +143,19 @@
 
 /*Footable responsive*/
 .footable                               { 
-    &.breakpoint tbody tr               {  
-        &.footable-first-column         { padding-left: 30px; }
-        &.footable-detail-show > td > span.footable-toggle:before { content: ''; .arrow_up(0.1em, -0.7em ); }
+    &.breakpoint tbody tr               { 
+        &.footable-first-column         { }
+/*/* стрелочка для первой ячейки краткой таблицы(белая)           &.footable-detail-show > td > span.footable-toggle:before { content: ''; .arrow_up(0.1em, -0.7em ); }*/
         &:hover:not(.footable-row-detail) {  cursor: pointer;}
         th                              { -webkit-touch-callout: none; }
         td                              { 
             .object_actions a span      { display: block; }
             span.footable-toggle        { display: inline-block;  speak: none; position: relative;
-            &:before                    { content: ''; .arrow_down(-0.55em, 0, 0.7em, @color-dark ); }  
-        } 
+/* стрелочка для первой ячейки краткой таблицы(синяя)               &:before                { content: ''; .arrow_down(-0.55em, 0, 0.7em, @color-dark ); } */
+            } 
         }
+        /****троеточие для столбца с действиями в сокращенной таблице*****/
+        td.footable-visible.footable-last-column { padding-right: 3em; background-image: @icon-more-info; background-position:  100% 50%; background-size: 3em 3em; background-repeat: no-repeat; }        
         &.footable-detail-show          {  
             .footable-visible           { color: #fff; background-color: @color-blue; }
         }
@@ -172,17 +172,37 @@
             
         } 
         .footable-row-detail-group          {  display: block;}
-    }    
+    }   
+    .footable-first-column                  { white-space: nowrap; }
 }
 
 /*Table balance*/
 .table_balance                              {
-    .green                                  { color: #6BAA0A; }
-    .red                                    { color: #9e0b0f; }
+    .green                                  { color: #6BAA0A; background: #CFFFCF !important; }
+    .red                                    { color: #9e0b0f; background: #FFE1E1 !important; }
+    .ar                                     { text-align: right; }
+    .ac                                     { text-align: center; }
     tr                                      {
-        &.row_total td                      { background: #fff799 !important; }
-        &.row_highlight td                  { background: lighten(#fff799, 15%) !important; }
+        &.row_total td                      { font-weight: bold; }
+        &.row_highlight td                  { background: #CBE6F2 !important; }
     }
 }
 
+/*POPUP*/
+.object_actions                             {
+   .popup                                   { display: inline-block; position: relative; padding: 1em 1em 1.2em 0.5em;
+       .popup_arrow                         { .arrow_down(-0.6em, 0, 0.7em, #ccc ); }
+       .popup_content                       { .input_style; .input_focus; .absolute_right(3.3em,0.9em); display: none; padding: 1.1em; z-index: 1;}
+       &:hover .popup_content               { display: block; }
+   }  
+}
 
+.breakpoint                                 {
+/*POPUP*/
+    .object_actions                         {
+       .popup                               { position: inherit; padding: 0;
+           .popup_arrow                     { display: none; }
+           .popup_content                   { display: block; position: inherit; padding: 0em; border: none; background: none; box-shadow: none; }
+       }  
+    }
+}
