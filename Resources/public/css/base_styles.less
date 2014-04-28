@@ -124,6 +124,7 @@
     thead th, tbody td                  { height: 2em; vertical-align: middle; 
         &:first-child                   { border-left: 1px solid @color-border; }
         &:last-child                    { border-right: 1px solid @color-border; }
+        &.td_object_actions             { text-align: center; }
     }
     thead th                            { padding: 0.5em; border-right: 1px solid #fff; border-top: 1px solid #fff; background-color: @color-gray;
         &.sortable a                    { color: #000; 
@@ -192,7 +193,7 @@
 .object_actions                             {
    .popup                                   { display: inline-block; position: relative; padding: 1em 1em 1.2em 0.5em;
        .popup_arrow                         { .arrow_down(-0.6em, 0, 0.7em, #ccc ); }
-       .popup_content                       { .input_style; .input_focus; .absolute_right(3em,0.9em); display: none; padding: 1.1em; z-index: 1;}
+       .popup_content                       { .input_style; .input_focus; .absolute_right(3em,0.9em); display: none; padding: 0.8em; z-index: 1;}
        &:hover .popup_content               { display: block; }
    }  
 }
