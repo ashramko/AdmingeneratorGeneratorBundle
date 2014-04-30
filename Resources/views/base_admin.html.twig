@@ -158,7 +158,16 @@
             {% block body %}{% endblock %}
         </div>
 
+          {# javascript для скрытия иконок фильтров и действий  #}
             {% block javascripts %}
-    {% endblock %}
+                <script> 
+                if($('.list_filters').size() === 0){
+                    $('a.i_filter').hide();
+                }
+                if($('.list_actions').size() === 0){
+                    $('a.i_table').hide();
+                }
+                </script>
+            {% endblock %}
     </body>
 </html>
