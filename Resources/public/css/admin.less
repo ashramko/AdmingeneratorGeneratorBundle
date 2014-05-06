@@ -46,7 +46,7 @@ textarea, select        { .input; }
 input[type="checkbox"]  { .input_multy; }
 input[type="radio"]     { .input_multy; 
     + label:before      { border-radius: 0.8em; }
-    &:checked + label:before { background-position: 0.23em -2.55em; }
+    &:checked + label:before { background-position: 0.23em -2.56em; }
     &:checked:disabled + label:before { background-position: 0.23em -3.85em; }
 }
 .hasDatepicker                          { width: 6.6em; }
@@ -111,7 +111,7 @@ input[type="submit"]                    { .button_icon; }
         button                          { .button_icon; }
     }
     .form-actions                       { padding: 1em; background: fadeout(@color-gray, 60%); 
-       a                                { .button_icon; }
+       a                                { .button_icon; padding-top: 0.7em; }
     }
     .errors                             { padding: 0.5em 1em; margin-top: -1.5em; margin-bottom: 1em; background: #ffcfcf; color: #9e0b0f; }
     
@@ -278,6 +278,7 @@ input[type="submit"]                    { .button_icon; }
 /*CUSTOM FILTERS*/
 .custom_filters                             {
     #form                                   { padding: 0.5em; padding-left: 1em;  }
+    .actions .button                        { margin-bottom: 0.5em; }
 }
 
 /*FLASHES*/
@@ -310,7 +311,9 @@ input[type="submit"]                    { .button_icon; }
 
 /*send_mail_form*/
 .send_mail_form                         { padding: 1em;
-    .form_block                         { margin-bottom: 1em; }
+    .form_block                         { margin-bottom: 1em; 
+        #form_send                      { .button_icon; background-position: -0.2em -113.9em; }
+    }
     .button:hover                       { color: #fff; }
 }
 
@@ -505,3 +508,4 @@ input[type="submit"]                    { .button_icon; }
 @media handheld, only screen and (max-width: 480px) {
     #map {max-width:100%; height:400px}
 }
+
