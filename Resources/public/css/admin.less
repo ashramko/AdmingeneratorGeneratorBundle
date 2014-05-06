@@ -61,8 +61,8 @@ input[type="radio"]     { .input_multy;
     &.select2-allowclear .select2-choice {
         .select2-chosen                 { margin-right: 1.5em; }
         .select2-arrow                  { display: none; }
-        .select2-search-choice-close    { .absolute_right(30%, 9.5em); height: 13em; width: 13em; background-size: 12em 37em; background-position: 0 0; background-image: @icon-close; 
-            &:hover                     { background-position: 0 -23.7em; }
+        abbr.select2-search-choice-close { .absolute_right(24%, 0.1em); height: 1.2em; width: 1.2em; background-size: 0.9em 2.7em; background-position: 0 0; background-image: @icon-close; font-size: 1.1em;
+            &:hover                     { background-position: 0 -1.65em; }
         }
     }
 }
@@ -410,7 +410,7 @@ input[type="submit"]                    { .button_icon; }
         &.visible                           { display: block; }
     } 
     /*PERPAGE*/
-    .list_header                            { position: inherit;
+    .list_header                            { position: inherit; min-height: inherit;
         .list_perpage                       { display: none; }
     }
     .list_footer                            { position: inherit;
