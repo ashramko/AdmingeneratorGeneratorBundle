@@ -1,6 +1,7 @@
 {% trans_default_domain "Admingenerator" %}
+
 {% block custom_filters %}
-    <a class="toggle_filter" onclick="toggleBlock('.list_filters', this);"><i></i></a>
+    <a class="toggle_filter" onclick="$('.list_filters').toggleClass('visible_pc'); $(this).toggleClass('active');"><i></i></a>
     <div class="list_filters custom_filters">
         <form method="post" {{ form_enctype(form) }} {% block action '' %}>
             <legend>Фільтри</legend>

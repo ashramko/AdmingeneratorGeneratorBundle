@@ -45,6 +45,8 @@ class EchoExtension extends \Twig_Extension
             'echo_endif'          => new \Twig_Function_Method($this, 'getEchoEndIf'),
             'echo_path'           => new \Twig_Function_Method($this, 'getEchoPath'),
             'echo_set'            => new \Twig_Function_Method($this, 'getEchoSet'),
+            'echo_setstart'       => new \Twig_Function_Method($this, 'getEchoSetStart'),
+            'echo_setend'         => new \Twig_Function_Method($this, 'getEchoSetEnd'),
             'echo_trans'          => new \Twig_Function_Method($this, 'getEchoTrans'),
             'echo_twig_assoc'     => new \Twig_Function_Method($this, 'getEchoTwigAssoc'),
             'echo_twig_filter'    => new \Twig_Function_Method($this, 'getEchoTwigFilter'),
@@ -375,6 +377,16 @@ class EchoExtension extends \Twig_Extension
         } else {
             return strtr('{% set %%var%% = %%value%% %}', array('%%var%%' => $var, '%%value%%' => $value));
         }
+    }
+
+    public function getEchoSetStart($var)
+    {
+        return strtr('{% set %%var%% %}', array('%%var%%' => $var));
+    }
+
+    public function getEchoSetEnd()
+    {
+        return '{% endset %}';
     }
 
     public function getEchoPath($path, $params = null, $filters = null)

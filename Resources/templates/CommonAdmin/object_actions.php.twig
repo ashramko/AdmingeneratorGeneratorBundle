@@ -4,8 +4,9 @@
         <td class="td_object_actions">
             <div class="object_actions">
             {% set popupActions = [] %}
+            {{ echo_set('actions', '[]', false) }}
             {% for action in builder.ObjectActions %}
-                {% set action %}
+                {{ echo_setstart('action') }}
                     {{ echo_block('td_list_object_actions_' ~ action.name) }}
                         {% if action.credentials or builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials') %}
                             {{ echo_if_granted( action.credentials ? action.credentials : builder.generator.getFromYaml('builders.' ~ action.name ~ '.params.credentials'), builder.ModelClass ) }}
@@ -22,22 +23,26 @@
                             {{ echo_endif () }}
                         {% endif %}
                     {{ echo_endblock() }}
-                {% endset %}
-                {% if loop.index > 2 %}
-                    {% set popupActions = popupActions|merge([action]) %}
-                {% else %}
-                    {{ action }}
-                {% endif %}
+                {{ echo_setend () }}
+                {{ echo_if ('action|trim') }}
+                    {{ echo_set('actions', 'actions|merge([action])', false) }}
+                {{ echo_endif () }}
             {% endfor %}
-            {% if popupActions|length %}
-                {{ echo_block('popup') }}
-                    <div class="popup">
-                        {{ echo_block('popup_content') }}
-                            {{ popupActions|join('') }}
-                        {{ echo_endblock('popup_content') }}
-                    </div>
-                {{ echo_endblock('popup') }}
-            {% endif %}
+            {{ echo_set('popupActions', '[]', false) }}
+            {{ echo_for('action', 'actions') }}
+                {{ echo_if('loop.index > 1') }}
+                    {{ echo_set('popupActions', 'popupActions|merge([action])', false) }}
+                {{ echo_else () }}
+                    {{ echo_twig('action|raw') }}
+                {{ echo_endif () }}
+            {{ echo_endfor() }}
+            {{ echo_if('popupActions|length') }}
+                <div class="popup">
+                    {{ echo_block('popup_content') }}
+                        {{ echo_twig('popupActions|join("")|raw') }}
+                    {{ echo_endblock('popup_content') }}
+                </div>
+            {{ echo_endif () }}
             {{ echo_block('td_list_object_actions_customActions') }}{{ echo_endblock() }}
             </div>
         </td>
@@ -77,4 +82,3 @@
     {{ echo_endspaceless() }}
     {% endspaceless %}
 {% endblock %}
-#}
