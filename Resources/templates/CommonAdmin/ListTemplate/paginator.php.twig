@@ -24,8 +24,10 @@
 
 {% block list_paginator_pages %}
     {{ echo_block('list_paginator_pages') }}
-    <div class="pagination">
-        {{ echo_twig("pagerfanta(" ~ builder.ModelClass ~ "s, 'admingenerator')") }}
-    </div>
+        {{ echo_if ( builder.ModelClass ~ "s.haveToPaginate") }}
+            <div class="pagination">
+                {{ echo_twig("pagerfanta(" ~ builder.ModelClass ~ "s, 'admingenerator')") }}
+            </div>
+        {{ echo_endif () }}
     {{ echo_endblock() }}
 {% endblock %}

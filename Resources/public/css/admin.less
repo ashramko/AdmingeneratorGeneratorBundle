@@ -37,17 +37,17 @@ input[type="file"],
 textarea, select        { .input; }
 
 .input_multy            { display: none;
-    + label             { cursor: pointer; }
-    + label:before      { content: ""; display: inline-block; height: 1.3em; width: 1.3em; margin: 0 0.5em 0 0; vertical-align: middle; border: 0.2em solid lighten(@color-gray, 5%); background: #fff; }
-    &:checked + label:before { border-color: @color-blue; background-image: @check-radio; background-position: 0.2em 0.15em;  background-repeat:  no-repeat; background-size: 1em 6.2em;  }
-    :disabled + label::before { border-color: lighten(@color-gray, 5%); }
-    &:checked:disabled + label:before { background-position: 0.2em -1.25em; }  
+    + i             { cursor: pointer; }
+    + i:before      { content: ""; display: inline-block; height: 1.3em; width: 1.3em; margin: 0 0.5em 0 0; vertical-align: middle; border: 0.2em solid lighten(@color-gray, 5%); background: #fff; }
+    &:checked + i:before { border-color: @color-blue; background-image: @check-radio; background-position: 0.2em 0.15em;  background-repeat:  no-repeat; background-size: 1em 6.2em;  }
+    :disabled + i::before { border-color: lighten(@color-gray, 5%); }
+    &:checked:disabled + i:before { background-position: 0.2em -1.25em; }  
 }
 input[type="checkbox"]  { .input_multy; }
 input[type="radio"]     { .input_multy; 
-    + label:before      { border-radius: 0.8em; }
-    &:checked + label:before { background-position: 0.23em -2.56em; }
-    &:checked:disabled + label:before { background-position: 0.23em -3.85em; }
+    + i:before      { border-radius: 0.8em; }
+    &:checked + i:before { background-position: 0.23em -2.56em; }
+    &:checked:disabled + i:before { background-position: 0.23em -3.85em; }
 }
 .hasDatepicker                          { width: 6.6em; }
 
@@ -185,7 +185,9 @@ input[type="submit"]                    { .button_icon; }
 }   
 
 /*LIST*/
-.list_header                                { min-height: 3.1em; margin-bottom: 0.5em; position: relative; }
+.list_header                                { margin-bottom: 0.5em; position: relative; 
+    &.has_perpage                           { min-height: 3.1em; }
+}
 .list_table                                 { margin-bottom: 1em; }
 
 /*MAP PAGE*/
@@ -266,7 +268,7 @@ input[type="submit"]                    { .button_icon; }
     &.visible_pc + .list                    { margin-right: 0em !important; }
     &.visible_pc + .list .list_perpage      { margin-right: 4em; }
     .form_row                               { margin-bottom: 0.5em; padding-bottom: 0.5em; border-bottom: 1px solid fadeout(#fff, 60%); 
-         label                              { display: inline-block; width: 100%; padding-bottom: 0.5em; }
+         label                              { display: inline-block; padding-bottom: 0.5em; }
     }
     .field_from, .field_to                  { margin-bottom: 0em; border: none; }
     input[type="text"], input[type="password"], input[type="phone"], 
@@ -279,6 +281,9 @@ input[type="submit"]                    { .button_icon; }
 .custom_filters                             {
     #form                                   { padding: 0.5em; padding-left: 1em;  }
     .actions .button                        { margin-bottom: 0.5em; }
+    .custom_filters_button                  { margin-bottom: 0.5em;
+        button                              { width: 100%; }
+    }
 }
 
 /*FLASHES*/

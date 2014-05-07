@@ -1,0 +1,17 @@
+{% block thead_th_sortable %}
+    <span class="sort-span  {{ echo_if ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'ASC'") }} sort_asc{{ echo_elseif ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'DESC'") }} sort_desc{{ echo_endif () }}">
+        {% if column.isSortable -%}
+            {{ echo_if ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'ASC'") }}
+                <a href="?sort={{ column.sortOn }}&order_by=desc">
+            {{ echo_else() }}
+                <a href="?sort={{ column.sortOn }}&order_by=asc">
+            {{ echo_endif () }}
+        {%- endif -%}
+
+        {{ echo_twig("'" ~ column.label|addslashes ~ "'|trans({}, '" ~ i18n_catalog|default("Admin") ~ "')") }}
+
+        {%- if column.isSortable -%}
+                </a>
+        {% endif -%}
+    </span>
+{% endblock thead_th_sortable %}

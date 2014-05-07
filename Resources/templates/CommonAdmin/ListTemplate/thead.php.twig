@@ -1,10 +1,14 @@
+{% use '../CommonAdmin/thead_th_sortable.php.twig' %}
+
 {% block list_thead %}
 {{ echo_block("list_thead") }}
 <thead>
     <tr class="list_thead">
         {% if batch_actions is defined and batch_actions|length > 0 %}
             <th class="list_thead_batch_action">
-                <input type="checkbox" name="batchAll" />
+                {{ echo_block("th_batch_action_checkbox") }}
+                    <input type="checkbox" name="batchAll" />
+                {{ echo_endblock() }}
             </th>
         {% endif %}
     {% for column in builder.columns -%}
@@ -12,53 +16,8 @@
             {{ echo_if_granted(column.credentials) }}
         {% endif %}
 
-        <th data-hide="{{ loop.index > 5 ? 'phone,tablet' : (loop.index > 3 ? 'phone') }}" class="list_thead_column {{ echo_if (column.isSortable) }}sortable{{ echo_if ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'ASC'") }} sort_asc{{ echo_elseif ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'DESC'") }} sort_desc{{ echo_endif () }}{{ echo_endif () }}">
-            <span class="sort-span">
-            {% if column.isSortable -%}
-                {{ echo_if ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'ASC'") }}
-                    <a href="?sort={{ column.sortOn }}&order_by=desc">
-                {{ echo_else() }}
-                    <a href="?sort={{ column.sortOn }}&order_by=asc">
-                {{ echo_endif () }}
-            {%- endif -%}
-                    {{ echo_twig("'" ~ column.label|addslashes ~ "'|trans({}, '" ~ i18n_catalog|default("Admin") ~ "')") }}
-            {%- if column.isSortable -%}
-                    </a>
-                {{ echo_if ("sortColumn == '" ~ column.sortOn ~ "'") }}
-                    {{ echo_if ("sortColumn == '" ~ column.sortOn ~ "' and sortOrder == 'ASC'") }}
-                        {% if column.sortType == 'alphabetic' %}
-                            <i class="icon-sort-by-alphabet active"></i>
-                            <i class="icon-sort-by-alphabet-alt hover"></i>
-                        {% elseif column.sortType == 'numeric' %}
-                            <i class="icon-sort-by-order active"></i>
-                            <i class="icon-sort-by-order-alt hover"></i>
-                        {% else %}
-                            <i class="icon-sort-by-attributes active"></i>
-                            <i class="icon-sort-by-attributes-alt hover"></i>
-                        {% endif %}
-                    {{ echo_else() }}
-                        {% if column.sortType == 'alphabetic' %}
-                            <i class="icon-sort-by-alphabet hover"></i>
-                            <i class="icon-sort-by-alphabet-alt active"></i>
-                        {% elseif column.sortType == 'numeric' %}
-                            <i class="icon-sort-by-order hover"></i>
-                            <i class="icon-sort-by-order-alt active"></i>
-                        {% else %}
-                            <i class="icon-sort-by-attributes hover"></i>
-                            <i class="icon-sort-by-attributes-alt active"></i>
-                        {% endif %}
-                    {{ echo_endif () }}
-                {{ echo_else() }}
-                    {% if column.sortType == 'alphabetic' %}
-                        <i class="icon-sort-by-alphabet placeholder hover"></i>
-                    {% elseif column.sortType == 'numeric' %}
-                        <i class="icon-sort-by-order placeholder hover"></i>
-                    {% else %}
-                        <i class="icon-sort-by-attributes placeholder hover"></i>
-                    {% endif %}
-                {{ echo_endif () }}
-            {% endif -%}
-            </span>
+        <th data-hide="{{ loop.index > 5 ? 'phone,tablet' : (loop.index > 3 ? 'phone') }}" class="list_thead_column">
+            {{- block('thead_th_sortable') -}}
         </th>
 
         {% if column.credentials %}

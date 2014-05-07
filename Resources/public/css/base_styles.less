@@ -28,7 +28,8 @@
 
 .icon (@left: 0em, @top: 0em, @image: @icon-blue) { background-image: @image; background-position: @left (-0.3em + @top);  background-repeat:  no-repeat; background-size: 3.5em 197em; 
     &.i_menu              { background-position: @left (-0.5em + @top); }
-    &.i_save-and-list, &.save-and-list { background-position: @left (-5em + @top); }
+    &.i_save-and-list, &.save-and-list, 
+    &.i_checkAndCreate    { background-position: @left (-5em + @top); }
     &.i_download          { background-position: @left (-9.8em + @top); }
     &.i_settings          { background-position: @left (-14.4em + @top); }
     &.i_filter            { background-position: @left (-18.8em + @top); }
@@ -87,11 +88,11 @@
 .button                 { display: inline-block; padding: 0.7em; padding-top: 0.6em; color: #fff; cursor: pointer; text-decoration: none; vertical-align: middle;  background-color: @color-blue; border: none; border-top: 1px solid lighten(@color-blue, 10%); box-shadow: 0 1px  #000000;
     &:hover             { border-top-color: lighten(@color-dark, 10%); background-color: @color-dark; }
 }
-.button_icon            { .button; .icon(-0.3em, -0.1em, @icon-white); padding-left: 3em !important; }
+.button_icon            { .button; .icon(-0.3em, -0.15em, @icon-white); padding-left: 3em !important; }
 
 /* ACTION LINKS */
 .link_icon              { position: relative; display: inline-block; vertical-align: middle;
-    i                   { .icon(-0.2em, 0.3em, @icon-white); display: inline-block; width: @round-icon-size; height: @round-icon-size; margin-right: 0.5em; vertical-align: middle; background-color: @color-blue; border-radius: 50%; content: ''; }
+    i                   { .icon(-0.25em, 0.2em, @icon-white); display: inline-block; width: @round-icon-size; height: @round-icon-size; margin-right: 0.5em; vertical-align: middle; background-color: @color-blue; border-radius: 50%; content: ''; }
     &:hover i           { background-color: @color-dark; }
 }
 .link_icon_mini         { .link_icon; text-align: center;
@@ -136,9 +137,9 @@
         &.row_highlight td              { background: #CBE6F2 !important; }
     }
     thead th                            { padding: 0.5em; border-right: 1px solid #fff; border-top: 1px solid #fff; background-color: @color-gray;
-        &.sortable a                    { color: #000; 
-            &:after                     { .arrow_down(-0.1em, 0, 0.4em, @color-blue ); margin-left: 0.3em; content: ''; }
-        }
+        a                               { color: #000; }
+        .sort_desc a:after              { .arrow_down(-0.1em, 0, 0.4em, @color-blue ); margin-left: 0.3em; content: ''; }
+        .sort_asc a:after               { .arrow_up(0.2em, 0, 0.4em, @color-blue ); margin-left: 0.3em; content: ''; }
     }  
     tbody tr                            { 
         &.odd                           { background-color: #f2f2f2 !important; }
@@ -146,7 +147,6 @@
             .object_actions span        { display: none; }
         }
     }
-    tfooter                             { }
     //для неадаптивных таблиц
     &:not(.table_responsive) tbody tr:nth-child(2n) td { background-color: #f2f2f2; } 
 }

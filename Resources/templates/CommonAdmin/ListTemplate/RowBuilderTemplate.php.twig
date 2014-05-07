@@ -3,7 +3,7 @@
 
 {% block list_row %}
 {{ echo_block('list_row') }}
-<tr class="{{ '{{ index is odd ? \'odd\' : \'even\' }}' }}">
+<tr class="{{ '{{ index is odd ? \'odd\' : \'even\' }}' }} {{ echo_block('list_row_class') }}{{ echo_endblock() }}">
     {{- block('list_row_content') -}}
 
     {{- block('object_actions') }}

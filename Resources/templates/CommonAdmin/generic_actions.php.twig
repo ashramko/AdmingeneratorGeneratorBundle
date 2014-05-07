@@ -43,7 +43,8 @@
         <a class="{{ action.name }} {{ action.class|default('') }}" href="{{ echo_path(actionRoute, actionParams) }}"
           {%- if action.confirm %} data-confirm="{{ echo_trans(action.confirm, {}, translationDomain) }}"{% endif %}
           {%- if action.csrfProtected %} data-csrf-token="{{ echo_path(actionRoute, actionParams, ['csrf_token']) }}" {% endif -%}>
-          {%- if action.icon %}<i class="{{ action.icon }}"></i> {% endif %}{{ echo_trans(action.label, {}, translationDomain) }}
+          <i class="{{ action.icon ? action.icon : 'i_' ~ action.name }}"></i>
+          {{- echo_trans(action.label, {}, translationDomain) -}}
         </a>
     {% endif %}
 {% endblock %}
