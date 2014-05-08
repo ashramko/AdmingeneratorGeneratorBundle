@@ -130,9 +130,12 @@ input[type="submit"]                    { .button_icon; }
 /*************************** HEADER *************************/
 
 .header                                 { overflow: hidden; background-color: @color-dark;
-    .logo                               { display: inline-block; padding: 0.3em 0.5em; font-size: 1.5em; color: #fff; text-decoration: none;
-        &:hover                         { color: #fff; }
-    }                                      
+    .logo_header                        { display: inline-block;
+        .logo_img, .logo                { display: inline-block; vertical-align: middle; }
+        .logo                           { padding: 0.3em 0.5em; font-size: 1.5em; color: #fff; text-decoration: none;
+            &:hover                     { color: #fff; }
+        } 
+    }    
     /*HEADER MENU*/
     .menu_mobile                        { display: none; float: right;
         a                               { .icon (-0.3em, 0.2em, @icon-white); display: inline-block; width: 2.8em; height: 2.8em;  

@@ -78,11 +78,18 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body {% block body_class '' %}>
-        <div class="header">
+        <div class="header {% block header_class %}{% endblock %}">
             {% block header %}
 
                 {% block logo %}
-                    <a class="logo" href="#">NitraTheme</a>
+                    <div class="logo_header">
+                        {% block logo_image %}
+                            <img class="logo_img" src="" alt="" />
+                        {% endblock logo_image %}
+                        {% block logo_name %}
+                            <a class="logo" href="#">NitraTheme</a>
+                        {% endblock logo_name %}
+                    </div>
                 {% endblock %}
             
                 {% block menu_mobile %}
