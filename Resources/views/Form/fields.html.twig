@@ -181,6 +181,65 @@
 {% endblock %}
 
 
+
+
+{# block choice_widget_collapsed %}
+{% spaceless %}
+    {% if required and empty_value is none and not empty_value_in_choices %}
+        {% set required = false %}
+    {% endif %}
+    <div class="input_box">
+        <span class="icon_box"></span>
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {% if empty_value is not none %}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+            {% endif %}
+            {% if preferred_choices|length > 0 %}
+                {% set options = preferred_choices %}
+                {{ block('choice_widget_options') }}
+                {% if choices|length > 0 and separator is not none %}
+                    <option disabled="disabled">{{ separator }}</option>
+                {% endif %}
+            {% endif %}
+            {% set options = choices %}
+            {{ block('choice_widget_options') }}
+        </select>
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+       
+{% block form_widget_simple %}
+{% spaceless %}
+    <div class="input_box">
+        <span class="icon_box"></span>
+        {% set type = type|default('text') %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endspaceless %}
+{% endblock form_widget_simple #}
+        
+  
+{% block button_row %}
+{% spaceless %}
+    <div class="custom_filters_button">
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock button_row %}
+
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /><i></i>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+        
+{% block radio_widget %}
+{% spaceless %}
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /><i></i>
+{% endspaceless %}
+{% endblock radio_widget %}
+  
 {% block ajax_autocomplete_widget %}
 
     {% spaceless %}
@@ -247,67 +306,8 @@ $Строка_отображения_во_время_набора_с_клави�
         </script>
     {% endspaceless %}
 {% endblock ajax_autocomplete_js %}        
-{% endblock ajax_autocomplete_widget %}
-
-{# block choice_widget_collapsed %}
-{% spaceless %}
-    {% if required and empty_value is none and not empty_value_in_choices %}
-        {% set required = false %}
-    {% endif %}
-    <div class="input_box">
-        <span class="icon_box"></span>
-        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-            {% if empty_value is not none %}
-                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
-            {% endif %}
-            {% if preferred_choices|length > 0 %}
-                {% set options = preferred_choices %}
-                {{ block('choice_widget_options') }}
-                {% if choices|length > 0 and separator is not none %}
-                    <option disabled="disabled">{{ separator }}</option>
-                {% endif %}
-            {% endif %}
-            {% set options = choices %}
-            {{ block('choice_widget_options') }}
-        </select>
-    </div>
-{% endspaceless %}
-{% endblock choice_widget_collapsed %}
-       
-{% block form_widget_simple %}
-{% spaceless %}
-    <div class="input_box">
-        <span class="icon_box"></span>
-        {% set type = type|default('text') %}
-        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-    </div>
-{% endspaceless %}
-{% endblock form_widget_simple #}
-        
-  
-
-
-{% block button_row %}
-{% spaceless %}
-    <div class="custom_filters_button">
-        {{ form_widget(form) }}
-    </div>
-{% endspaceless %}
-{% endblock button_row %}
-
-
-{% block checkbox_widget %}
-{% spaceless %}
-        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /><i></i>
-{% endspaceless %}
-{% endblock checkbox_widget %}
-        
-{% block radio_widget %}
-{% spaceless %}
-    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /><i></i>
-{% endspaceless %}
-{% endblock radio_widget %}
-        
+{% endblock ajax_autocomplete_widget %}    
+    
 {% block nlupload_widget %}
     {# Поле для завантаження файлів #}
     <input type="file" class="fileupload" multiple="multiple" data-url="/nlupload/attach"/>

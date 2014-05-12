@@ -25,44 +25,48 @@ a                       { cursor: pointer; color: #128bbd; text-decoration: unde
 /*************************** Base styles *************************/
 
 /* INPUTS */
-.input                  { .input_style; padding: 0.5em; vertical-align: middle; line-height: 1.1em; 
-     &:focus            { .input_focus; }
-     &[readonly]        { cursor: default; background: none; border-color: #ddd; box-shadow: none; }
-     &[disabled]        { cursor: default; color: #aaa; background: #f5f5f5; border-color: #e2e6e7; box-shadow: none; }
-     &:invalid          { border-color: #9e0b0f; box-shadow: 0 0 2px lighten(#9e0b0f, 10%); }
+.input                                      { .input_style; padding: 0.5em; vertical-align: middle; line-height: 1.1em; 
+     &:focus                                { .input_focus; }
+     &[readonly]                            { cursor: default; background: none; border-color: #ddd; box-shadow: none; }
+     &[disabled]                            { cursor: default; color: #aaa; background: #f5f5f5; border-color: #e2e6e7; box-shadow: none; }
+     &:invalid                              { border-color: #9e0b0f; box-shadow: 0 0 2px lighten(#9e0b0f, 10%); }
 }
 input[type="text"], input[type="password"], input[type="phone"], 
 input[type="date"], input[type="number"], input[type="email"], 
-input[type="file"],
-textarea, select        { .input; }
+input[type="file"], textarea, select        { .input; }
 
-.input_multy            { display: none;
-    + i             { cursor: pointer; }
-    + i:before      { content: ""; display: inline-block; height: 1.3em; width: 1.3em; margin: 0 0.5em 0 0; vertical-align: middle; border: 0.2em solid lighten(@color-gray, 5%); background: #fff; }
-    &:checked + i:before { border-color: @color-blue; background-image: @check-radio; background-position: 0.2em 0.15em;  background-repeat:  no-repeat; background-size: 1em 6.2em;  }
-    :disabled + i::before { border-color: lighten(@color-gray, 5%); }
-    &:checked:disabled + i:before { background-position: 0.2em -1.25em; }  
+.input_multy                                { display: none;
+    + i                                     { cursor: pointer; }
+    + i:before                              { content: ""; display: inline-block; height: 1.3em; width: 1.3em; margin: 0 0.5em 0 0; vertical-align: middle; border: 0.2em solid lighten(@color-gray, 5%); background: #fff; }
+    &:checked + i:before                    { border-color: @color-blue; background-image: @check-radio; background-position: 0.2em 0.15em;  background-repeat:  no-repeat; background-size: 1em 6.2em;  }
+    :disabled + i::before                   { border-color: lighten(@color-gray, 5%); }
+    &:checked:disabled + i:before           { background-position: 0.2em -1.25em; }  
 }
-input[type="checkbox"]  { .input_multy; }
-input[type="radio"]     { .input_multy; 
-    + i:before      { border-radius: 0.8em; }
-    &:checked + i:before { background-position: 0.23em -2.56em; }
-    &:checked:disabled + i:before { background-position: 0.23em -3.85em; }
+input[type="checkbox"]                      { .input_multy; }
+input[type="radio"]                         { .input_multy; 
+    + i:before                              { border-radius: 0.8em; }
+    &:checked + i:before                    { background-position: 0.23em -2.56em; }
+    &:checked:disabled + i:before           { background-position: 0.23em -3.85em; }
 }
-.hasDatepicker                          { width: 6.6em; }
+.hasDatepicker                              { width: 6.6em; }
 
 /* SELECT 2 */
-.select2-container                      { margin-bottom: 0.5em; min-width: 11em; 
-    .select2-choice                     { .input; display: block; height: 1.3em; border-radius: 0em;
-        .select2-arrow                  { background: none; border: none; right: 0.3em;
-            b                           { .arrow_down(0, 0.9em, 0.5em, @color-gray ); width: auto; height: auto; background: none; }
+.select2-container, .select2-container-multi { margin-bottom: 0.5em; min-width: 11em; 
+    .select2-choice, .select2-choices       { .input; display: block; height: 1.3em; border-radius: 0em;
+        .select2-arrow, .select2-search-field { background: none; border: none; right: 0.3em;
+            b, .select2-input               { .arrow_down(0, 0.9em, 0.5em, @color-gray ); width: auto; height: auto; background: none; }
+            .select2-input                  { width: 0 !important; height: 0; margin-top: 0.5em; padding: 0; box-shadow: none; }
         }
     }
-    &.select2-allowclear .select2-choice {
-        .select2-chosen                 { margin-right: 1.5em; }
-        .select2-arrow                  { display: none; }
-        abbr.select2-search-choice-close { .absolute_right(24%, 0.1em); height: 1.2em; width: 1.2em; background-size: 0.9em 2.7em; background-position: 0 0; background-image: @icon-close; font-size: 1.1em;
-            &:hover                     { background-position: 0 -1.65em; }
+    &.select2-dropdown-open .select2-choices, &.select2-container-active .select2-choices { .input_focus; }
+    .select2-choices                        { min-height: 1.4em; 
+        .select2-search-choice + .select2-search-field { display: none; }
+    }
+    &.select2-allowclear .select2-choice    {
+        .select2-chosen                     { margin-right: 1.5em; }
+        .select2-arrow                      { display: none; }
+        abbr.select2-search-choice-close    { .absolute_right(24%, 0.1em); height: 1.2em; width: 1.2em; background-size: 0.9em 2.7em; background-position: 0 0; background-image: @icon-close; font-size: 1.1em;
+            &:hover                         { background-position: 0 -1.65em; }
         }
     }
 }
@@ -163,6 +167,11 @@ input[type="submit"]                    { .button_icon; }
         }  
     }
     
+}
+
+/*HEADER SHORT*/
+.header_short                           {
+   .logo_header                         { float: left; } 
 }
 
 /*CONTENT*/
@@ -326,8 +335,8 @@ input[type="submit"]                    { .button_icon; }
 }
 
 /*POPUP IN TABLE*/
-.popup .popup_content  span             { display: none; }
-.object_actions .popup                  { .popup_style; }
+.popup .popup_content  span                 { display: none; }
+.object_actions .popup                      { .popup_style; }
 
 .breakpoint                                 {
 /*POPUP*/
@@ -369,7 +378,8 @@ input[type="submit"]                    { .button_icon; }
 
 /*************************** MENU_SETTINGS for MOBILE *************************/
 @media handheld, only screen and (max-width: 1024px) {
-    body                                    { font-size: 18px; }
+    body                                    { font-size: 16px; }
+    h1                                      { font-size: 1.2em; }
     .content                                {
          header                             { margin-bottom: 0em;  }
          .admin_list .list                  { position: inherit; padding: 0; }
@@ -415,13 +425,14 @@ input[type="submit"]                    { .button_icon; }
     .list_filters + .list                   { margin-right: 0em !important; }
     .list_filters.visible + .list .list_perpage { margin: 0 auto; }
     
-    
+    /*LIST*/
+    .list_header.has_perpage                { min-height: 0em; }
     /*LIST_BAR*/
     .list_bar                               { display: none;
         &.visible                           { display: block; }
     } 
     /*PERPAGE*/
-    .list_header                            { position: inherit; min-height: inherit;
+    .list_header                            { position: inherit;
         .list_perpage                       { display: none; }
     }
     .list_footer                            { position: inherit;
@@ -441,17 +452,21 @@ input[type="submit"]                    { .button_icon; }
 
 /******************/
 @media handheld, only screen and (min-width: 480px) and (max-width: 860px) {
-    body                                    { font-size: 18px; }
+    body                                    { font-size: 16px; }
 }
 /*************************** MENU_SETTINGS for MOBILE mini *************************/
 @media handheld, only screen and (max-width: 480px) {
     body                                    { font-size: 14px; 
-        &.home_page                         { font-size: 18px; }
+        &.home_page                         { font-size: 16px; }
     }
     /*MENU*/
     .header                                 { min-height: 2.8em; height: auto;
        .menu_drop                           { position: static !important; margin-top: 0.2em; }
     } 
+    /*HEADER SHORT*/
+    .header_short                           {
+       .logo_header                         { float: none; } 
+    }
     /*FILTERS*/
     .list_filters.visible                   { position: static !important; float: none; width: 100%; box-shadow: none; }
     /*LIST_BAR*/
